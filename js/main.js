@@ -101,8 +101,9 @@ function initHeroCanvas(){
     v.addColorStop(0,"rgba(0,0,0,0)"); v.addColorStop(1,"rgba(0,0,0,0.55)");
     ctx.fillStyle=v; ctx.fillRect(0,0,w,h);
   }
-  gsap.ticker.add(()=>draw(performance.now()));
-  return { setIntensity:(v)=>{ intensity=v; } };
+  let active=true; // skip drawing when the hero is scrolled out of view (perf)
+  gsap.ticker.add(()=>{ if(active) draw(performance.now()); });
+  return { setIntensity:(v)=>{ intensity=v; }, setActive:(v)=>{ active=v; } };
 }
 
 /* ---------- 5. PRELOADER ---------- */
@@ -174,6 +175,10 @@ function initHeroScroll(heroCanvas){
   ps.chars.forEach(c=>c.classList.add("rp-char"));
   gsap.set(ps.chars,{opacity:0,yPercent:80});
 
+  // pause the hero canvas loop once the pinned hero is fully out of view (perf)
+  if(heroCanvas) ScrollTrigger.create({ trigger:".scroll-wrap", start:"top bottom", end:"bottom top",
+    onToggle:(self)=>heroCanvas.setActive(self.isActive) });
+
   const tl=gsap.timeline({
     scrollTrigger:{ trigger:".scroll-wrap", start:"top top", end:"bottom bottom", scrub:1,
       onUpdate:(self)=>{ if(heroCanvas) heroCanvas.setIntensity(1-self.progress*0.65); } }
@@ -192,44 +197,58 @@ function initHeroScroll(heroCanvas){
     .to([img,frame],{scale:0,opacity:0,duration:0.6},3.6);
 }
 
-/* ---------- 8. RED FLUID WAVE ---------- */
+/* ---------- 8. RED FLUID WAVE — draws itself as you scroll ---------- */
 function initFluidLine(){
   const svg=document.getElementById("fluid-svg");
   const path=document.getElementById("fluid-line");
   const host=document.querySelector(".section-after");
-  let W=0,H=0, scrollPhase=0, vh=window.innerHeight;
+  let W=0,H=0, vh=window.innerHeight, L=0, progress=0;
+
+  // depth: vertical red gradient stroke instead of a flat fill (injected, no HTML edit)
+  const NS="http://www.w3.org/2000/svg";
+  const defs=document.createElementNS(NS,"defs");
+  defs.innerHTML='<linearGradient id="fluidGrad" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#ff3b14"/><stop offset="0.5" stop-color="#ff1e00"/>'
+    +'<stop offset="1" stop-color="#cc1700"/></linearGradient>';
+  svg.insertBefore(defs, svg.firstChild);
+  path.style.stroke="url(#fluidGrad)";
 
   function measure(){
     W=host.clientWidth; H=host.clientHeight; vh=window.innerHeight;
     svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
     svg.setAttribute("width",W); svg.setAttribute("height",H);
   }
-  // smooth ribbon: dense samples, sine wave with a viewport-relative wavelength,
-  // amplitude tapered by an envelope, animated by scroll + a gentle continuous drift.
-  function build(time){
+  // static smooth ribbon: built once. A sine wave with viewport-relative wavelength,
+  // amplitude tapered by an envelope so it's thin at the very top/bottom.
+  function build(){
     const midX=W*0.5;
     const amp=Math.min(W*0.30, 360);
-    const lambda=Math.max(vh*1.45, 680);      // one full weave ≈ 1.45 viewports
-    const step=Math.max(20, H/440);
-    const phase=scrollPhase + time*0.00022;    // scroll travel + slow flow
+    const lambda=Math.max(vh*1.45, 680);   // one full weave ≈ 1.45 viewports
+    const step=Math.max(18, H/520);
     const k=(Math.PI*2)/lambda;
     let d="";
-    for(let y=-80; y<=H+80; y+=step){
+    for(let y=-60; y<=H+60; y+=step){
       const t=Math.min(Math.max(y/H,0),1);
-      const env=0.32+0.68*Math.sin(t*Math.PI);                       // thin at top/bottom
-      const x=midX + Math.sin(y*k + phase)*amp*env
-                   + Math.sin(y*k*0.37 + phase*0.6)*amp*0.18*env;     // 2nd harmonic = organic
+      const env=0.30+0.70*Math.sin(t*Math.PI);
+      const x=midX + Math.sin(y*k)*amp*env + Math.sin(y*k*0.37)*amp*0.18*env;
       d+=(d===""?"M":"L")+x.toFixed(1)+" "+y.toFixed(1)+" ";
     }
     path.setAttribute("d",d);
+    L=path.getTotalLength();
+    // dash the whole length; offset hides it, scroll reveals it top→bottom
+    path.style.strokeDasharray=L;
+    apply();
   }
-  measure(); build(0);
-  window.addEventListener("resize",()=>{ measure(); build(performance.now()); });
+  // reveal the line up to the current scroll progress (the "charging" effect)
+  function apply(){ path.style.strokeDashoffset=(L*(1-progress)).toFixed(1); }
+
+  measure(); build();
+  window.addEventListener("resize",()=>{ measure(); build(); });
+
   ScrollTrigger.create({
-    trigger:host, start:"top bottom", end:"bottom top", scrub:true,
-    onUpdate:(self)=>{ scrollPhase=self.progress*Math.PI*5; }
+    trigger:host, start:"top top", end:"bottom bottom", scrub:0.6,
+    onUpdate:(self)=>{ progress=self.progress; apply(); }
   });
-  gsap.ticker.add(()=>build(performance.now()));   // continuous, alive
 }
 
 /* ---------- 9. ABOUT: word highlight + photo ---------- */
