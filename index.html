@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobias Arraiza — Creative Developer</title>
+  <meta name="description" content="Créatif discret, je donne vie aux idées — entre mouvement, détail et douceur." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ INTRO / PRELOADER ============ -->
+  <div class="intro-bg" id="intro-bg"></div>
+  <div class="name-layer" id="name-layer">
+    <div class="preloader-content">
+      <span class="pl-word" id="pl-luke">Tobias</span>
+      <span class="pl-word pl-accent" id="pl-baffait">Arraiza</span>
+      <span class="pl-dot">.</span>
+    </div>
+    <div class="pl-counter" id="pl-counter">0</div>
+    <div class="pl-tag" id="pl-tag">Creative Developer — Portfolio ’26</div>
+  </div>
+
+  <!-- transition panels (red + dark) -->
+  <div class="transition-panel" id="transition-panel">
+    <div class="t-panel-dark"></div>
+    <div class="t-panel-red"></div>
+  </div>
+
+  <!-- ============ CUSTOM CURSOR ============ -->
+  <div class="cursor" id="cursor"><span class="cursor__label" id="cursor-label"></span></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- ============ SCROLL UI ============ -->
+  <div class="scroll-pct" id="scroll-pct">000</div>
+  <div class="scroll-timeline" id="scroll-timeline">
+    <span class="st-label" id="st-label">Hero</span>
+    <div class="st-bar" id="st-bar"></div>
+  </div>
+
+  <!-- ============ HERO (pinned 400vh) ============ -->
+  <div class="scroll-wrap">
+    <section class="hero" id="hero">
+      <canvas class="hero-canvas" id="hero-canvas"></canvas>
+
+      <div class="hero-content">
+        <p class="hero-tagline" id="hero-tagline">
+          Créatif discret, je donne vie aux idées —<br />
+          entre <span class="serif-italic">mouvement</span>,
+          <span class="serif-italic">détail</span> &amp;
+          <span class="serif-italic">douceur</span>.
+        </p>
+
+        <div class="hero-bar" id="hero-bar">
+          <div class="hero-bar-left">
+            <span class="chr-hover">Based in Buenos Aires, ARG</span>
+            <span class="chr-hover" id="hero-clock">--:--</span>
+          </div>
+          <nav class="hero-bar-center">
+            <span class="hero-name" id="hero-name">
+              <span class="hn">Tobias</span> <span class="hn pl-accent">Arraiza</span><sup>®</sup>
+            </span>
+          </nav>
+          <nav class="hero-bar-right">
+            <a href="#work" class="chr-hover">Works</a>
+            <a href="#about" class="chr-hover">Info</a>
+            <a href="#contact" class="chr-hover">Contact</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- reveal image that "opens" + 360 -->
+      <div class="reveal-image-wrap" id="reveal-wrap">
+        <div class="reveal-image" id="reveal-image"
+             style="background-image:url('https://picsum.photos/seed/lukehero/1200/1500')"></div>
+        <div class="reveal-frame" id="reveal-frame">
+          <span class="reveal-corner tl"></span>
+          <span class="reveal-corner tr"></span>
+          <span class="reveal-corner bl"></span>
+          <span class="reveal-corner br"></span>
+        </div>
+        <div class="reveal-overlay" id="reveal-overlay"></div>
+        <div class="reveal-phrase" id="reveal-phrase">Ingenio, diseño y código.</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ CONTENT (over the red fluid line) ============ -->
+  <main class="section-after">
+
+    <!-- red fluid wave behind content -->
+    <svg class="fluid-line-svg" id="fluid-svg" preserveAspectRatio="none" aria-hidden="true">
+      <path class="fluid-line" id="fluid-line" d="" />
+    </svg>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-inner">
+        <span class="sec-label">(01) — About</span>
+        <h2 class="about-text" data-words>
+          Como <span class="serif-italic">desarrollador creative</span>, construyo
+          experiencias web donde se unen diseño, código y emoción.
+        </h2>
+        <p class="about-sub reveal-up">
+          Me llamo Tobias. Desarrollador creative, estudio informática en Buenos Aires —
+          construyo interfaces vivas entre diseño, código y animación.
+        </p>
+        <div class="about-meta">
+          <a href="#work" class="about-btn magnetic chr-hover" data-cursor="Ver"><span data-magnetic-text>Ver los proyectos</span><i>↘</i></a>
+          <span class="about-version serif-italic">V3.0</span>
+        </div>
+      </div>
+      <div class="about-photo-wrap">
+        <div class="about-photo" id="about-photo"
+             style="background-image:url('https://picsum.photos/seed/lukeportrait/900/1100')"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="work">
+      <div class="projects-inner">
+        <div class="projects-head">
+          <span class="sec-label">(02) — Selected Works</span>
+          <span class="projects-count">[ 08 ]</span>
+        </div>
+        <div class="projects-list" id="projects-list">
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/cyberdiag/900/600">
+            <span class="proj-idx">01</span>
+            <span class="proj-name">CyberDiag <em>website</em></span>
+            <span class="proj-tag">Web · Branding</span>
+            <span class="proj-year">2026</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/anima22/900/600">
+            <span class="proj-idx">02</span>
+            <span class="proj-name">Anima</span>
+            <span class="proj-tag">Motion · WebGL</span>
+            <span class="proj-year">2025</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/cyberapp/900/600">
+            <span class="proj-idx">03</span>
+            <span class="proj-name">CyberDiag <em>app</em></span>
+            <span class="proj-tag">Product · UI</span>
+            <span class="proj-year">2025</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/zenith9/900/600">
+            <span class="proj-idx">04</span>
+            <span class="proj-name">Zenith</span>
+            <span class="proj-tag">Web · 3D</span>
+            <span class="proj-year">2025</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/skymcdb/900/600">
+            <span class="proj-idx">05</span>
+            <span class="proj-name">SkymcDB</span>
+            <span class="proj-tag">Platform · Data</span>
+            <span class="proj-year">2024</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/chroma7/900/600">
+            <span class="proj-idx">06</span>
+            <span class="proj-name">ChromaBlock</span>
+            <span class="proj-tag">Game · Interaction</span>
+            <span class="proj-year">2024</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/symphony3/900/600">
+            <span class="proj-idx">07</span>
+            <span class="proj-name">Symphony</span>
+            <span class="proj-tag">Audio · Visual</span>
+            <span class="proj-year">2024</span>
+          </a>
+          <a class="proj-item" href="#" data-cursor="Open" data-img="https://picsum.photos/seed/echo11/900/600">
+            <span class="proj-idx">08</span>
+            <span class="proj-name">Echo</span>
+            <span class="proj-tag">Experiment · WebGL</span>
+            <span class="proj-year">2023</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIRCLE GALLERY (360, pinned 600vh) -->
+    <section class="circle-gallery" id="gallery">
+      <div class="circle-gallery-pin">
+        <div class="cg-ring" id="cg-ring"></div>
+        <div class="cg-phrase" id="cg-phrase">
+          <span class="word">Du</span> <span class="word serif-italic">mouvement</span>,
+          <span class="word">du</span> <span class="word">détail,</span>
+          <span class="word">et</span> <span class="word">beaucoup</span>
+          <span class="word">de</span> <span class="word serif-italic">soin.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" id="skills">
+      <div class="skills-inner">
+        <div class="skills-left">
+          <span class="sec-label">(03)</span>
+          <h2 class="skills-text">Capabilities <span class="skills-arrow">↘</span></h2>
+          <p class="skills-subtitle">Stack &amp; outils — du front au shader, du back à la sécurité.</p>
+        </div>
+        <div class="skills-right" id="skills-acc">
+          <div class="skill-group open">
+            <div class="skill-header"><span>Frontend</span><i>+</i></div>
+            <div class="skill-body"><p>HTML · CSS · JavaScript · TypeScript · React · Next.js · Tailwind</p></div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-header"><span>Animation &amp; 3D</span><i>+</i></div>
+            <div class="skill-body"><p>GSAP · Lenis · Three.js · WebGL / GLSL · Blender</p></div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-header"><span>Backend</span><i>+</i></div>
+            <div class="skill-body"><p>Node · Express · Python · Java · PHP · PostgreSQL · Supabase</p></div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-header"><span>Security &amp; Tools</span><i>+</i></div>
+            <div class="skill-body"><p>Linux · Bash · OWASP · Nmap · Metasploit · Docker · Git · Figma</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="awards" id="awards">
+      <div class="awards-inner">
+        <span class="sec-label awards-title">(04) — Recognition</span>
+        <div class="awards-list">
+          <div class="award-item reveal-up">
+            <span class="award-org">GSAP</span>
+            <span class="award-site">tobiasarraiza</span>
+            <span class="award-prize serif-italic">Site of the Week</span>
+            <span class="award-date">17.06.2026</span>
+          </div>
+          <div class="award-item reveal-up">
+            <span class="award-org">Awwwards</span>
+            <span class="award-site">tobiasarraiza</span>
+            <span class="award-prize serif-italic">Nominee</span>
+            <span class="award-date">26.06.2026</span>
+          </div>
+          <div class="award-item reveal-up">
+            <span class="award-org">Behance</span>
+            <span class="award-site">Web Design</span>
+            <span class="award-prize serif-italic">Featured</span>
+            <span class="award-date">2025</span>
+          </div>
+          <div class="award-item reveal-up">
+            <span class="award-org">CSSDA</span>
+            <span class="award-site">tobiasarraiza</span>
+            <span class="award-prize serif-italic">Special Kudos</span>
+            <span class="award-date">2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (pinned, blob flood) -->
+    <section class="contact" id="contact">
+      <div class="contact-pin">
+        <div class="contact-blob" id="contact-blob"></div>
+        <div class="contact-content" id="contact-content">
+          <span class="contact-label">(05) — Let's talk</span>
+          <h2 class="contact-title" id="contact-title">Let's create<br /><span class="serif-italic">together</span></h2>
+          <div class="contact-frame">
+            <span class="frame-corner tl"></span><span class="frame-corner tr"></span>
+            <span class="frame-corner bl"></span><span class="frame-corner br"></span>
+            <div class="contact-frame-img" style="background-image:url('https://picsum.photos/seed/lukecontact/600/900')"></div>
+          </div>
+          <a href="mailto:tobiasarraiza17@gmail.com" class="contact-mail magnetic chr-hover" data-cursor="Email">
+            <span data-magnetic-text>tobiasarraiza17@gmail.com</span><i>↗</i>
+          </a>
+          <p class="contact-dispo">À la recherche d'une alternance dès septembre — disponible en freelance partout dans le monde.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-top-col">
+          <span class="footer-col-label">Get in touch</span>
+          <a href="mailto:tobiasarraiza17@gmail.com" class="chr-hover footer-mail" data-cursor="Email">tobiasarraiza17@gmail.com</a>
+        </div>
+        <div class="footer-top-col">
+          <span class="footer-col-label">Socials</span>
+          <a href="https://github.com/SkyNigh1" target="_blank" rel="noopener" class="chr-hover">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/luke-baffait" target="_blank" rel="noopener" class="chr-hover">LinkedIn ↗</a>
+          <a href="https://www.behance.net/lukebaffait" target="_blank" rel="noopener" class="chr-hover">Behance ↗</a>
+        </div>
+        <div class="footer-top-col">
+          <span class="footer-col-label">Index</span>
+          <a href="#work" class="chr-hover">Works</a>
+          <a href="#about" class="chr-hover">Info</a>
+          <a href="#contact" class="chr-hover">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-name" id="footer-name">
+        <span class="fn-word">Tobias</span><span class="fn-word pl-accent">Arraiza</span>
+      </div>
+
+      <div class="footer-base">
+        <span>© 2026 — All rights reserved</span>
+        <span>Made with <span class="serif-italic">care</span>, GSAP &amp; Lenis</span>
+        <button class="footer-top-btn chr-hover" id="back-top" data-cursor="Up">Back to top ↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- floating project preview -->
+  <div class="proj-preview" id="proj-preview"><div class="proj-card" id="proj-card"></div></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
